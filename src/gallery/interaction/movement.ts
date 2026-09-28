@@ -33,12 +33,30 @@ export function getMovementDelta(
 ): Point2D {
   const forwardInput = Number(input.forward) - Number(input.backward)
   const rightInput = Number(input.right) - Number(input.left)
+
+  return getMovementDeltaFromAxes(
+    forwardInput,
+    rightInput,
+    yaw,
+    speed,
+    deltaSeconds,
+  )
+}
+
+export function getMovementDeltaFromAxes(
+  forwardInput: number,
+  rightInput: number,
+  yaw: number,
+  speed: number,
+  deltaSeconds: number,
+): Point2D {
   const inputLength = Math.hypot(forwardInput, rightInput)
 
   if (inputLength === 0) return { x: 0, z: 0 }
 
-  const normalizedForward = forwardInput / inputLength
-  const normalizedRight = rightInput / inputLength
+  const normalization = Math.max(1, inputLength)
+  const normalizedForward = forwardInput / normalization
+  const normalizedRight = rightInput / normalization
   const distance = speed * deltaSeconds
 
   return {

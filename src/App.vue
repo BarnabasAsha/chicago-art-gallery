@@ -8,16 +8,24 @@ const {
   displayedArtworks,
   enterWithKeyboard,
   enterWithPointer,
+  enterWithTouch,
   isExploring,
   loadError,
   loadStatus,
   retryLoad,
+  pauseExperience,
+  touchMovement,
 } = galleryExperience
 const entryButton = shallowRef<HTMLButtonElement | null>(null)
 
 function handleEntry(event: MouseEvent) {
   if (event.detail === 0) {
     enterWithKeyboard()
+    return
+  }
+
+  if (window.matchMedia('(pointer: coarse)').matches) {
+    enterWithTouch()
     return
   }
 
@@ -104,7 +112,12 @@ watch(loadStatus, async (status) => {
                 <span aria-hidden="true">→</span>
               </button>
               <p id="gallery-instructions" :class="styles.instructions">
-                Use W, A, S, D to move · Mouse or arrow keys to look · Escape to pause
+                <span :class="styles.desktopInstructions">
+                  W, A, S, D to move · Click-drag to walk · Mouse to look
+                </span>
+                <span :class="styles.touchInstructions">
+                  Drag left to move · Drag right to look
+                </span>
               </p>
             </template>
           </div>
@@ -138,6 +151,37 @@ watch(loadStatus, async (status) => {
           </div>
         </dl>
       </aside>
+
+      <div :class="styles.touchControls" aria-label="Touch gallery controls">
+        <button
+          type="button"
+          :class="styles.touchPause"
+          aria-label="Pause gallery"
+          @click="pauseExperience"
+        >
+          Pause
+        </button>
+        <span v-if="!touchMovement.active" :class="styles.touchMoveHint">
+          Drag to move
+        </span>
+        <span :class="styles.touchLookHint">Drag to look</span>
+        <span
+          v-if="touchMovement.active"
+          :class="styles.touchJoystick"
+          :style="{
+            left: `${touchMovement.originX}px`,
+            top: `${touchMovement.originY}px`,
+          }"
+          aria-hidden="true"
+        >
+          <span
+            :class="styles.touchJoystickKnob"
+            :style="{
+              transform: `translate(${touchMovement.offsetX}px, ${touchMovement.offsetY}px)`,
+            }"
+          />
+        </span>
+      </div>
     </template>
 
     <section

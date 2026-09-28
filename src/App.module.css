@@ -9,12 +9,13 @@
 .canvas {
   width: 100%;
   height: 100%;
+  touch-action: none;
 }
 
 .status {
   position: absolute;
+  top: clamp(1.25rem, 3vw, 2.5rem);
   right: clamp(1.25rem, 3vw, 2.5rem);
-  bottom: clamp(1.25rem, 3vw, 2.5rem);
   display: flex;
   align-items: center;
   gap: 0.55rem;
@@ -133,6 +134,10 @@
   line-height: 1.6;
 }
 
+.touchInstructions {
+  display: none;
+}
+
 .loadingOnly {
   display: grid;
   width: min(4.5rem, 22vw);
@@ -188,8 +193,8 @@
   position: absolute;
   bottom: clamp(1.25rem, 3vw, 2.5rem);
   left: clamp(1.25rem, 3vw, 2.5rem);
-  width: min(18rem, calc(100% - 2.5rem));
-  padding: 1rem;
+  width: min(15.25rem, calc(100% - 2.5rem));
+  padding: 0.75rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 0.75rem;
   color: rgba(255, 255, 255, 0.94);
@@ -210,14 +215,14 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 0.75rem;
-  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.55rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .controlsTitle {
   margin: 0;
-  font-size: 0.75rem;
+  font-size: 0.68rem;
   font-weight: 750;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -225,43 +230,43 @@
 
 .controlsHint {
   color: rgba(255, 255, 255, 0.48);
-  font-size: 0.75rem;
+  font-size: 0.66rem;
 }
 
 .controlsList {
   display: grid;
-  gap: 0.55rem;
+  gap: 0.4rem;
   margin: 0;
-  font-size: 0.78rem;
+  font-size: 0.7rem;
 }
 
 .controlsList div {
   display: grid;
-  grid-template-columns: 7.2rem 1fr;
+  grid-template-columns: 6.15rem 1fr;
   align-items: center;
-  gap: 0.75rem;
-  min-height: 1.65rem;
+  gap: 0.55rem;
+  min-height: 1.4rem;
 }
 
 .controlsList dt {
   display: flex;
-  gap: 0.25rem;
+  gap: 0.2rem;
   align-items: center;
 }
 
 .controlsList kbd {
   display: inline-grid;
-  min-width: 1.55rem;
-  height: 1.55rem;
+  min-width: 1.35rem;
+  height: 1.35rem;
   place-items: center;
-  padding: 0 0.35rem;
+  padding: 0 0.28rem;
   border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 0.3rem;
   color: rgba(255, 255, 255, 0.9);
   background: rgba(255, 255, 255, 0.08);
   box-shadow: inset 0 -1px rgba(0, 0, 0, 0.2);
   font-family: inherit;
-  font-size: 0.72rem;
+  font-size: 0.64rem;
   font-weight: 700;
 }
 
@@ -269,6 +274,10 @@
   margin: 0;
   color: rgba(255, 255, 255, 0.65);
   line-height: 1.35;
+}
+
+.touchControls {
+  display: none;
 }
 
 .overlayEnterActive,
@@ -345,13 +354,105 @@
   }
 
   .controls {
-    width: min(17rem, calc(100% - 2rem));
+    width: min(15.25rem, calc(100% - 2rem));
     bottom: 1rem;
     left: 1rem;
   }
 
   .status {
     display: none;
+  }
+}
+
+@media (pointer: coarse) {
+  .desktopInstructions,
+  .controls,
+  .reticle {
+    display: none;
+  }
+
+  .touchInstructions {
+    display: inline;
+  }
+
+  .touchControls {
+    position: absolute;
+    inset: 0;
+    display: block;
+    color: rgba(255, 255, 255, 0.7);
+    pointer-events: none;
+  }
+
+  .touchPause {
+    position: absolute;
+    top: max(1rem, env(safe-area-inset-top));
+    left: max(1rem, env(safe-area-inset-left));
+    padding: 0.55rem 0.72rem;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 999px;
+    color: rgba(255, 255, 255, 0.84);
+    background: rgba(20, 20, 18, 0.48);
+    backdrop-filter: blur(10px);
+    font: inherit;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    pointer-events: auto;
+    text-transform: uppercase;
+  }
+
+  .touchMoveHint,
+  .touchLookHint {
+    position: absolute;
+    bottom: max(2rem, env(safe-area-inset-bottom));
+    font-size: 0.68rem;
+    font-weight: 650;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    animation: touchHintFade 4s 1.5s ease both;
+  }
+
+  .touchMoveHint {
+    left: 12.5%;
+    transform: translateX(-50%);
+  }
+
+  .touchLookHint {
+    right: 12.5%;
+    transform: translateX(50%);
+  }
+
+  .touchJoystick {
+    position: absolute;
+    width: 7rem;
+    height: 7rem;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    background: rgba(20, 20, 18, 0.15);
+    box-shadow: inset 0 0 2rem rgba(0, 0, 0, 0.12);
+    transform: translate(-50%, -50%);
+  }
+
+  .touchJoystickKnob {
+    position: absolute;
+    top: calc(50% - 1.35rem);
+    left: calc(50% - 1.35rem);
+    width: 2.7rem;
+    height: 2.7rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.62);
+    box-shadow: 0 0.35rem 1.25rem rgba(0, 0, 0, 0.18);
+  }
+}
+
+@keyframes touchHintFade {
+  0%,
+  45% {
+    opacity: 0.75;
+  }
+
+  100% {
+    opacity: 0;
   }
 }
 
@@ -362,7 +463,9 @@
   .entryOverlayReady,
   .controls,
   .status,
-  .loadingProgress {
+  .loadingProgress,
+  .touchMoveHint,
+  .touchLookHint {
     animation: none;
   }
 

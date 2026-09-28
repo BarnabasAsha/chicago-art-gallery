@@ -20,6 +20,7 @@ import {
 import {
   createFirstPersonController,
   type FirstPersonController,
+  type TouchMovementIndicator,
 } from '../gallery/interaction/createFirstPersonController'
 import { createArtworkCatalog } from '../services/createArtworkCatalog'
 
@@ -34,6 +35,13 @@ export function useGalleryExperience() {
   const loadStatus = ref<GalleryLoadStatus>('loading')
   const loadError = ref('')
   const displayedArtworks = shallowRef<Artwork[]>([])
+  const touchMovement = ref<TouchMovementIndicator>({
+    active: false,
+    offsetX: 0,
+    offsetY: 0,
+    originX: 0,
+    originY: 0,
+  })
   let controller: FirstPersonController | undefined
   let prototype: GalleryPrototype | undefined
   let textureCache: ArtworkTextureCache | undefined
@@ -46,6 +54,14 @@ export function useGalleryExperience() {
 
   const enterWithKeyboard = () => {
     if (loadStatus.value === 'ready') controller?.activateKeyboard()
+  }
+
+  const enterWithTouch = () => {
+    if (loadStatus.value === 'ready') controller?.activateTouch()
+  }
+
+  const pauseExperience = () => {
+    controller?.pause()
   }
 
   const retryLoad = () => {
@@ -132,6 +148,9 @@ export function useGalleryExperience() {
           onActiveChange: (isActive) => {
             isExploring.value = isActive
           },
+          onTouchMovementChange: (indicator) => {
+            touchMovement.value = indicator
+          },
         })
         displayedArtworks.value = artworkCatalog.getLoadedArtworks()
         loadStatus.value = 'ready'
@@ -177,10 +196,13 @@ export function useGalleryExperience() {
     displayedArtworks: readonly(displayedArtworks),
     enterWithKeyboard,
     enterWithPointer,
+    enterWithTouch,
     isExploring: readonly(isExploring),
     loadError: readonly(loadError),
     loadStatus: readonly(loadStatus),
     retryLoad,
+    pauseExperience,
+    touchMovement: readonly(touchMovement),
   }
 }
 
