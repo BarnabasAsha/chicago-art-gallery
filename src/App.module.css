@@ -4,12 +4,18 @@
   height: 100svh;
   overflow: hidden;
   background: #d8d3c8;
+  overscroll-behavior: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .canvas {
   width: 100%;
   height: 100%;
   touch-action: none;
+  -webkit-user-drag: none;
 }
 
 .status {
@@ -109,6 +115,7 @@
   font-weight: 750;
   letter-spacing: 0.11em;
   text-transform: uppercase;
+  touch-action: manipulation;
   transition:
     color 180ms ease,
     background-color 180ms ease,
@@ -399,6 +406,7 @@
     letter-spacing: 0.08em;
     pointer-events: auto;
     text-transform: uppercase;
+    touch-action: manipulation;
   }
 
   .touchMoveHint,
