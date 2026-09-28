@@ -3,14 +3,81 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#050505" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="robots" content="index, follow" />
+    <meta name="application-name" content="Virtual Gallery" />
+    <link rel="canonical" href="https://chicago-art.netlify.app/" />
     <meta
       name="description"
-      content="An interactive virtual gallery featuring works from the Art Institute of Chicago."
+      content="Explore an interactive 3D virtual gallery featuring open-access artworks from the Art Institute of Chicago collection."
     />
-    <title>Virtual Gallery | Art Institute of Chicago</title>
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="Virtual Gallery" />
+    <meta property="og:url" content="https://chicago-art.netlify.app/" />
+    <meta
+      property="og:title"
+      content="Virtual Gallery | Art Institute of Chicago Collection"
+    />
+    <meta
+      property="og:description"
+      content="Explore open-access artworks in an interactive 3D gallery experience."
+    />
+    <meta
+      property="og:image"
+      content="https://chicago-art.netlify.app/og.png"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A symmetrical view of the Virtual Gallery main hall."
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Virtual Gallery | Art Institute of Chicago Collection"
+    />
+    <meta
+      name="twitter:description"
+      content="Explore open-access artworks in an interactive 3D gallery experience."
+    />
+    <meta
+      name="twitter:image"
+      content="https://chicago-art.netlify.app/og.png"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="A symmetrical view of the Virtual Gallery main hall."
+    />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <title>Virtual Gallery | Art Institute of Chicago Collection</title>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Virtual Gallery",
+        "description": "An interactive 3D gallery featuring open-access artworks from the Art Institute of Chicago collection.",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "isAccessibleForFree": true,
+        "inLanguage": "en"
+      }
+    </script>
   </head>
   <body>
     <div id="app"></div>
+    <noscript>
+      <main>
+        <h1>Virtual Gallery</h1>
+        <p>
+          Explore open-access artworks from the Art Institute of Chicago in an
+          interactive 3D gallery. JavaScript is required to enter the gallery.
+        </p>
+      </main>
+    </noscript>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>
