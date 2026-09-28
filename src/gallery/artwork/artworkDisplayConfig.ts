@@ -1,0 +1,1 @@
+export const ARTWORK_FRAME_BORDER = 0.045

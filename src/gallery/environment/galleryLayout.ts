@@ -1,0 +1,29 @@
+export const WALL_HEIGHT = 4
+export const WALL_DEPTH = 0.2
+
+export const MAIN_HALL_WIDTH = 12
+export const MAIN_HALL_FRONT_Z = 7
+export const MAIN_HALL_BACK_Z = -6
+export const MAIN_HALL_CENTER_Z =
+  (MAIN_HALL_FRONT_Z + MAIN_HALL_BACK_Z) / 2
+
+export const PASSAGE_WIDTH = 3.2
+
+export const HALLWAY_WIDTH = 5
+export const HALLWAY_SEGMENT_LENGTH = 6
+
+export const REST_SECTION_WIDTH = 9
+export const REST_SECTION_LENGTH = 6
+export const REST_BENCH_WIDTH = 0.75
+export const REST_BENCH_LENGTH = 2.2
+export const REST_BENCH_OFFSET_X = 3.15
+
+export const MAIN_HALL_BENCH_LENGTH = 3.6
+export const MAIN_HALL_BENCH_DEPTH = 1.15
+
+export const MAIN_HALL_PASSAGE_ARTWORK_COUNT = 2
+export const MAIN_HALL_ENTRANCE_ARTWORK_COUNT = 2
+export const HALLWAY_ARTWORKS_PER_SEGMENT = 4
+export const REST_SECTION_ARTWORK_COUNT = 8
+export const MINIMUM_CORRIDOR_ARTWORK_POOL_SIZE =
+  HALLWAY_ARTWORKS_PER_SEGMENT * 2 + REST_SECTION_ARTWORK_COUNT
